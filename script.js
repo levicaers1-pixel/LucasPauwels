@@ -1,6 +1,6 @@
 /**
- * Lucas Pauwels Golf - Interactive JavaScript
- * Award-winning website for rising golf star
+ * Lucas Pauwels Golf - Modern JavaScript
+ * Ultra-contemporary animations and interactions
  */
 
 // ============================================
@@ -10,60 +10,59 @@ const navbar = document.querySelector('.navbar');
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 const backToTop = document.getElementById('backToTop');
-const golfBallContainer = document.getElementById('golfBallContainer');
+const particlesContainer = document.getElementById('particles');
 const contactForm = document.getElementById('contactForm');
+const typingText = document.getElementById('typingText');
 
 // ============================================
 // Initialization
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
-    initGolfBalls();
+    initParticles();
     initNavigation();
     initScrollEffects();
     initScrollReveal();
-    initStatCounters();
+    initTypingEffect();
+    initStatAnimations();
     initFormValidation();
     initSmoothScroll();
+    initHoverEffects();
 });
 
 // ============================================
-// Golf Ball Background Animation
+// Particles Background
 // ============================================
-function initGolfBalls() {
-    const ballCount = 15;
+function initParticles() {
+    const particleCount = 30;
     
-    for (let i = 0; i < ballCount; i++) {
-        createGolfBall();
+    for (let i = 0; i < particleCount; i++) {
+        createParticle();
     }
 }
 
-function createGolfBall() {
-    const ball = document.createElement('div');
-    ball.className = 'golf-ball';
+function createParticle() {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
     
-    // Random position
+    // Random properties
+    const size = Math.random() * 4 + 2;
     const startX = Math.random() * 100;
     const startY = Math.random() * 100;
-    
-    // Random size
-    const size = Math.random() * 15 + 10;
-    
-    // Random animation duration
     const duration = Math.random() * 15 + 15;
-    
-    // Random delay
     const delay = Math.random() * 10;
+    const opacity = Math.random() * 0.3 + 0.1;
     
-    ball.style.cssText = `
+    particle.style.cssText = `
         left: ${startX}%;
         top: ${startY}%;
         width: ${size}px;
         height: ${size}px;
         animation-duration: ${duration}s;
         animation-delay: ${delay}s;
+        opacity: ${opacity};
     `;
     
-    golfBallContainer.appendChild(ball);
+    particlesContainer.appendChild(particle);
 }
 
 // ============================================
@@ -74,6 +73,7 @@ function initNavigation() {
     hamburger.addEventListener('click', () => {
         hamburger.classList.toggle('active');
         mobileMenu.classList.toggle('active');
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
     });
     
     // Close mobile menu when clicking a link
@@ -82,16 +82,23 @@ function initNavigation() {
         link.addEventListener('click', () => {
             hamburger.classList.remove('active');
             mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
         });
     });
     
     // Navbar scroll effect
+    let lastScroll = 0;
+    
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 100) {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll > 50) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
         }
+        
+        lastScroll = currentScroll;
     });
 }
 
@@ -108,15 +115,14 @@ function initScrollEffects() {
         }
     });
     
-    // Parallax effect for hero section
-    const hero = document.querySelector('.hero');
+    // Parallax effect for hero
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
+        const hero = document.querySelector('.hero');
         const heroContent = document.querySelector('.hero-content');
         
-        if (heroContent && scrolled < window.innerHeight) {
-            heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
-            heroContent.style.opacity = 1 - (scrolled / window.innerHeight);
+        if (hero && heroContent && scrolled < window.innerHeight) {
+            heroContent.style.transform = `translateY(${scrolled * 0.2}px)`;
         }
     });
 }
@@ -126,19 +132,20 @@ function initScrollEffects() {
 // ============================================
 function initScrollReveal() {
     const revealElements = document.querySelectorAll(
-        '.section-header, .about-container, .about-image-container, .about-content, '
-        + '.stats-container, .stat-card, .sponsor-hero, .tier-card, '
-        + '.contact-container, .contact-info, .contact-form-container, '
-        + '.achievement-card, .current-sponsors'
+        '.section-header, .about-grid, .about-image, .about-content, '
+        + '.stats-grid, .stat-card, .sponsor-hero, .tier-card, '
+        + '.contact-grid, .contact-info, .contact-form-wrapper, '
+        + '.content-card, .footer'
     );
     
     const revealOnScroll = () => {
-        revealElements.forEach(element => {
+        revealElements.forEach((element, index) => {
             const elementTop = element.getBoundingClientRect().top;
             const windowHeight = window.innerHeight;
             
             if (elementTop < windowHeight - 100) {
-                element.classList.add('reveal', 'active');
+                element.classList.add('fade-in-up', 'active');
+                element.style.transitionDelay = `${index * 0.1}s`;
             }
         });
     };
@@ -151,25 +158,73 @@ function initScrollReveal() {
 }
 
 // ============================================
-// Stat Counters Animation
+// Typing Effect
 // ============================================
-function initStatCounters() {
+function initTypingEffect() {
+    if (!typingText) return;
+    
+    const texts = [
+        "European Tour Rising Star",
+        "Belgian Golf Prodigy",
+        "Future Major Champion",
+        "Driving for Greatness"
+    ];
+    
+    let textIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    
+    function type() {
+        const currentText = texts[textIndex];
+        
+        if (isDeleting) {
+            typingText.textContent = currentText.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            typingText.textContent = currentText.substring(0, charIndex + 1);
+            charIndex++;
+        }
+        
+        let typeSpeed = isDeleting ? 50 : 100;
+        
+        if (!isDeleting && charIndex === currentText.length) {
+            typeSpeed = 2000;
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            textIndex = (textIndex + 1) % texts.length;
+            typeSpeed = 500;
+        }
+        
+        setTimeout(type, typeSpeed);
+    }
+    
+    // Start typing after a delay
+    setTimeout(type, 1500);
+}
+
+// ============================================
+// Stat Animations
+// ============================================
+function initStatAnimations() {
     const statCards = document.querySelectorAll('.stat-card');
     const observerOptions = {
-        threshold: 0.5,
+        threshold: 0.2,
         rootMargin: '0px'
     };
     
     const statObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                const progressBar = entry.target.querySelector('.stat-ring-progress');
-                const percentElement = entry.target.querySelector('.stat-percent');
+                const progressBar = entry.target.querySelector('.stat-progress');
                 
-                if (progressBar && percentElement) {
-                    const percent = parseInt(percentElement.textContent);
-                    animateStat(progressBar, percent, percentElement);
+                if (progressBar) {
+                    const progress = progressBar.style.getPropertyValue('--progress');
+                    animateProgress(progressBar, progress);
                 }
+                
+                // Add glow effect
+                entry.target.style.boxShadow = '0 0 30px rgba(0, 255, 136, 0.1)';
                 
                 statObserver.unobserve(entry.target);
             }
@@ -179,26 +234,20 @@ function initStatCounters() {
     statCards.forEach(card => statObserver.observe(card));
 }
 
-function animateStat(progressBar, targetPercent, percentElement) {
-    const radius = 45;
-    const circumference = 2 * Math.PI * radius;
-    const offset = circumference - (targetPercent / 100) * circumference;
-    
-    let currentPercent = 0;
-    const increment = targetPercent / 100;
+function animateProgress(progressBar, targetProgress) {
+    let currentProgress = 0;
+    const target = parseFloat(targetProgress) || 0;
+    const increment = target / 100;
     
     const timer = setInterval(() => {
-        currentPercent += increment;
+        currentProgress += increment;
         
-        if (currentPercent >= targetPercent) {
-            currentPercent = targetPercent;
+        if (currentProgress >= target) {
+            currentProgress = target;
             clearInterval(timer);
         }
         
-        const currentOffset = circumference - (currentPercent / 100) * circumference;
-        progressBar.style.strokeDasharray = `${circumference} ${circumference}`;
-        progressBar.style.strokeDashoffset = currentOffset;
-        percentElement.textContent = `${Math.round(currentPercent)}%`;
+        progressBar.style.setProperty('--progress', `${currentProgress}%`);
     }, 20);
 }
 
@@ -233,15 +282,16 @@ function initFormValidation() {
         // Show loading state
         submitBtn.innerHTML = `
             <span>Sending...</span>
-            <i class="fas fa-spinner fa-spin"></i>
+            <svg class="spinner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" stroke-dasharray="60 100"/>
+            </svg>
         `;
         submitBtn.disabled = true;
         
-        // Simulate form submission (replace with actual API call)
+        // Simulate form submission
         try {
             await simulateFormSubmission({ name, email, subject, message });
             
-            // Show success
             showFormSuccess('Message sent successfully! I\'ll get back to you soon.');
             contactForm.reset();
         } catch (error) {
@@ -259,73 +309,70 @@ function validateEmail(email) {
 }
 
 function showFormError(message) {
-    // Remove existing alerts
-    const existingAlert = contactForm.querySelector('.form-alert');
-    if (existingAlert) existingAlert.remove();
+    removeFormAlert();
     
-    // Create error alert
     const alert = document.createElement('div');
     alert.className = 'form-alert error';
     alert.innerHTML = `
-        <i class="fas fa-exclamation-circle"></i>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
         <span>${message}</span>
     `;
     
-    // Style the alert
-    alert.style.cssText = `
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 15px;
-        background: rgba(255, 0, 0, 0.1);
-        border: 1px solid rgba(255, 0, 0, 0.3);
-        border-radius: 10px;
-        color: #ff6b6b;
-        margin-bottom: 20px;
-        font-size: 0.95rem;
-        animation: slideDown 0.3s ease;
-    `;
+    styleAlert(alert, '#ff4444', 'rgba(255, 68, 68, 0.1)', 'rgba(255, 68, 68, 0.3)');
     
     contactForm.insertBefore(alert, contactForm.firstChild);
     
-    // Remove after 5 seconds
-    setTimeout(() => {
-        alert.style.animation = 'fadeOut 0.3s ease forwards';
-        setTimeout(() => alert.remove(), 300);
-    }, 5000);
+    autoRemoveAlert(alert);
 }
 
 function showFormSuccess(message) {
-    // Remove existing alerts
-    const existingAlert = contactForm.querySelector('.form-alert');
-    if (existingAlert) existingAlert.remove();
+    removeFormAlert();
     
-    // Create success alert
     const alert = document.createElement('div');
     alert.className = 'form-alert success';
     alert.innerHTML = `
-        <i class="fas fa-check-circle"></i>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+        </svg>
         <span>${message}</span>
     `;
     
-    // Style the alert
+    styleAlert(alert, '#00ff88', 'rgba(0, 255, 136, 0.1)', 'rgba(0, 255, 136, 0.3)');
+    
+    contactForm.insertBefore(alert, contactForm.firstChild);
+    
+    autoRemoveAlert(alert);
+}
+
+function styleAlert(alert, color, bg, border) {
     alert.style.cssText = `
         display: flex;
         align-items: center;
-        gap: 10px;
-        padding: 15px;
-        background: rgba(0, 255, 0, 0.1);
-        border: 1px solid rgba(0, 255, 0, 0.3);
-        border-radius: 10px;
-        color: #00ff88;
+        gap: 12px;
+        padding: 16px 20px;
+        background: ${bg};
+        border: 1px solid ${border};
+        border-radius: 12px;
+        color: ${color};
         margin-bottom: 20px;
         font-size: 0.95rem;
         animation: slideDown 0.3s ease;
     `;
     
-    contactForm.insertBefore(alert, contactForm.firstChild);
-    
-    // Remove after 5 seconds
+    alert.querySelector('svg')?.setAttribute('style', `width: 20px; height: 20px; flex-shrink: 0;`);
+}
+
+function removeFormAlert() {
+    const existingAlert = contactForm.querySelector('.form-alert');
+    if (existingAlert) existingAlert.remove();
+}
+
+function autoRemoveAlert(alert) {
     setTimeout(() => {
         alert.style.animation = 'fadeOut 0.3s ease forwards';
         setTimeout(() => alert.remove(), 300);
@@ -335,7 +382,6 @@ function showFormSuccess(message) {
 function simulateFormSubmission(data) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            // Simulate 90% success rate
             if (Math.random() > 0.1) {
                 resolve({ success: true });
             } else {
@@ -370,43 +416,13 @@ function initSmoothScroll() {
 }
 
 // ============================================
-// Image Stack Animation on Hover
+// Hover Effects
 // ============================================
-document.addEventListener('DOMContentLoaded', () => {
-    const imageStack = document.querySelector('.image-stack');
+function initHoverEffects() {
+    // Card tilt effect
+    const cards = document.querySelectorAll('.stat-card, .tier-card, .content-card, .image-wrapper');
     
-    if (imageStack) {
-        imageStack.addEventListener('mousemove', (e) => {
-            const items = imageStack.querySelectorAll('.image-stack-item');
-            const rect = imageStack.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            items.forEach((item, index) => {
-                const speed = (index + 1) * 0.5;
-                const xOffset = (x - rect.width / 2) / rect.width * speed * 20;
-                const yOffset = (y - rect.height / 2) / rect.height * speed * 20;
-                
-                item.style.transform = `translate(${xOffset}px, ${yOffset}px) scale(1)`;
-            });
-        });
-        
-        imageStack.addEventListener('mouseleave', () => {
-            const items = imageStack.querySelectorAll('.image-stack-item');
-            items.forEach(item => {
-                item.style.transform = 'translate(0, 0) scale(1)';
-            });
-        });
-    }
-});
-
-// ============================================
-// Tier Card Hover Effect
-// ============================================
-document.addEventListener('DOMContentLoaded', () => {
-    const tierCards = document.querySelectorAll('.tier-card');
-    
-    tierCards.forEach(card => {
+    cards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -418,42 +434,30 @@ document.addEventListener('DOMContentLoaded', () => {
             const rotateX = (y - centerY) / 10;
             const rotateY = (centerX - x) / 10;
             
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1)`;
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
         });
         
         card.addEventListener('mouseleave', () => {
-            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
         });
     });
-});
-
-// ============================================
-// Typing Effect for Hero Tagline
-// ============================================
-document.addEventListener('DOMContentLoaded', () => {
-    const tagline = document.querySelector('.hero-tagline');
     
-    if (tagline) {
-        const text = tagline.textContent;
-        tagline.textContent = '';
-        tagline.style.visibility = 'visible';
+    // Button hover effects
+    const buttons = document.querySelectorAll('.btn');
+    
+    buttons.forEach(btn => {
+        btn.addEventListener('mouseenter', () => {
+            btn.style.transform = 'translateY(-2px)';
+        });
         
-        let i = 0;
-        const typeWriter = () => {
-            if (i < text.length) {
-                tagline.textContent += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 50);
-            }
-        };
-        
-        // Start typing after hero animations
-        setTimeout(typeWriter, 1500);
-    }
-});
+        btn.addEventListener('mouseleave', () => {
+            btn.style.transform = 'translateY(0)';
+        });
+    });
+}
 
 // ============================================
-// CSS Animations Keyframes (for JS-injected elements)
+// CSS Animations
 // ============================================
 const style = document.createElement('style');
 style.textContent = `
@@ -477,13 +481,19 @@ style.textContent = `
         }
     }
     
-    @keyframes pulse {
-        0%, 100% {
-            transform: scale(1);
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
         }
-        50% {
-            transform: scale(1.05);
+        to {
+            transform: rotate(360deg);
         }
+    }
+    
+    .spinner {
+        width: 20px;
+        height: 20px;
+        animation: spin 1s linear infinite;
     }
 `;
 document.head.appendChild(style);
@@ -491,9 +501,9 @@ document.head.appendChild(style);
 // ============================================
 // Performance Optimization
 // ============================================
-// Lazy load images (if added later)
+// Lazy load images
 if ('IntersectionObserver' in window) {
-    const lazyImages = document.querySelectorAll('img[data-src]');
+    const images = document.querySelectorAll('img[data-src]');
     
     const imageObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -506,7 +516,7 @@ if ('IntersectionObserver' in window) {
         });
     });
     
-    lazyImages.forEach(img => imageObserver.observe(img));
+    images.forEach(img => imageObserver.observe(img));
 }
 
 // ============================================
@@ -514,19 +524,19 @@ if ('IntersectionObserver' in window) {
 // ============================================
 console.log(`
 %c Lucas Pauwels Golf %c
-%c Rising Star in Golf %c
+%c Modern. Sleek. Professional. %c
 
-%c Driving Ambition. Perfecting Precision. Chasing Greatness. %c
+%c Stats: 295yds Drive | 78% Accuracy | 71.2 Avg Score %c
 
-%c Interested in sponsorship? Contact: lucas.pauwels@golfpro.com %c
+%c Interested in sponsorship? Contact: lucas@pauwelsgolf.com %c
 `, 
-'background: #c8a86b; color: #1a2e2e; font-size: 20px; font-weight: bold; padding: 10px 20px; border-radius: 5px;',
+'background: #00ff88; color: #0a0a0a; font-size: 20px; font-weight: bold; padding: 10px 20px; border-radius: 5px;',
 '',
-'background: #2d5a5a; color: #ffffff; font-size: 14px; padding: 5px 15px; border-radius: 3px;',
+'background: #141414; color: #ffffff; font-size: 14px; padding: 5px 15px; border-radius: 3px;',
 '',
-'background: #1a2e2e; color: #c8a86b; font-size: 12px; padding: 10px; border-radius: 3px; font-style: italic;',
+'background: #141414; color: #00ff88; font-size: 12px; padding: 10px; border-radius: 3px; font-style: italic;',
 '',
-'background: #2d5a5a; color: #ffffff; font-size: 10px; padding: 5px; border-radius: 3px;',
+'background: #141414; color: #ffffff; font-size: 10px; padding: 5px; border-radius: 3px;',
 ''
 );
 
@@ -538,11 +548,12 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
         hamburger.classList.remove('active');
         mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
     }
 });
 
 // ============================================
-// Touch Support for Mobile
+// Touch Support
 // ============================================
 let touchStartX = 0;
 let touchEndX = 0;
@@ -561,10 +572,13 @@ function handleSwipe() {
     const diff = touchStartX - touchEndX;
     
     if (Math.abs(diff) > swipeThreshold) {
-        if (diff > 0) {
-            // Swipe left - could navigate to next section
-        } else {
-            // Swipe right - could navigate to previous section
-        }
+        // Could implement section navigation here
     }
 }
+
+// ============================================
+// Preloader (Optional)
+// ============================================
+window.addEventListener('load', () => {
+    document.body.classList.add('loaded');
+});
