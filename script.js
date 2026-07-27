@@ -1,6 +1,6 @@
 /**
- * Lucas Pauwels Golf - Modern JavaScript
- * Ultra-contemporary animations and interactions
+ * L P Golf - Clean JavaScript
+ * Minimal, professional, anonymous
  */
 
 // ============================================
@@ -10,60 +10,19 @@ const navbar = document.querySelector('.navbar');
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 const backToTop = document.getElementById('backToTop');
-const particlesContainer = document.getElementById('particles');
 const contactForm = document.getElementById('contactForm');
-const typingText = document.getElementById('typingText');
 
 // ============================================
 // Initialization
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
-    initParticles();
     initNavigation();
     initScrollEffects();
     initScrollReveal();
-    initTypingEffect();
     initStatAnimations();
     initFormValidation();
     initSmoothScroll();
-    initHoverEffects();
 });
-
-// ============================================
-// Particles Background
-// ============================================
-function initParticles() {
-    const particleCount = 30;
-    
-    for (let i = 0; i < particleCount; i++) {
-        createParticle();
-    }
-}
-
-function createParticle() {
-    const particle = document.createElement('div');
-    particle.className = 'particle';
-    
-    // Random properties
-    const size = Math.random() * 4 + 2;
-    const startX = Math.random() * 100;
-    const startY = Math.random() * 100;
-    const duration = Math.random() * 15 + 15;
-    const delay = Math.random() * 10;
-    const opacity = Math.random() * 0.3 + 0.1;
-    
-    particle.style.cssText = `
-        left: ${startX}%;
-        top: ${startY}%;
-        width: ${size}px;
-        height: ${size}px;
-        animation-duration: ${duration}s;
-        animation-delay: ${delay}s;
-        opacity: ${opacity};
-    `;
-    
-    particlesContainer.appendChild(particle);
-}
 
 // ============================================
 // Navigation
@@ -87,18 +46,12 @@ function initNavigation() {
     });
     
     // Navbar scroll effect
-    let lastScroll = 0;
-    
     window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-        
-        if (currentScroll > 50) {
+        if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
         }
-        
-        lastScroll = currentScroll;
     });
 }
 
@@ -114,17 +67,6 @@ function initScrollEffects() {
             backToTop.classList.remove('visible');
         }
     });
-    
-    // Parallax effect for hero
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const hero = document.querySelector('.hero');
-        const heroContent = document.querySelector('.hero-content');
-        
-        if (hero && heroContent && scrolled < window.innerHeight) {
-            heroContent.style.transform = `translateY(${scrolled * 0.2}px)`;
-        }
-    });
 }
 
 // ============================================
@@ -133,9 +75,9 @@ function initScrollEffects() {
 function initScrollReveal() {
     const revealElements = document.querySelectorAll(
         '.section-header, .about-grid, .about-image, .about-content, '
-        + '.stats-grid, .stat-card, .sponsor-hero, .tier-card, '
+        + '.stats-grid, .stat-card, .sponsor-intro, .tier-card, '
         + '.contact-grid, .contact-info, .contact-form-wrapper, '
-        + '.content-card, .footer'
+        + '.feature-item, .footer'
     );
     
     const revealOnScroll = () => {
@@ -158,52 +100,6 @@ function initScrollReveal() {
 }
 
 // ============================================
-// Typing Effect
-// ============================================
-function initTypingEffect() {
-    if (!typingText) return;
-    
-    const texts = [
-        "European Tour Rising Star",
-        "Belgian Golf Prodigy",
-        "Future Major Champion",
-        "Driving for Greatness"
-    ];
-    
-    let textIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    
-    function type() {
-        const currentText = texts[textIndex];
-        
-        if (isDeleting) {
-            typingText.textContent = currentText.substring(0, charIndex - 1);
-            charIndex--;
-        } else {
-            typingText.textContent = currentText.substring(0, charIndex + 1);
-            charIndex++;
-        }
-        
-        let typeSpeed = isDeleting ? 50 : 100;
-        
-        if (!isDeleting && charIndex === currentText.length) {
-            typeSpeed = 2000;
-            isDeleting = true;
-        } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            textIndex = (textIndex + 1) % texts.length;
-            typeSpeed = 500;
-        }
-        
-        setTimeout(type, typeSpeed);
-    }
-    
-    // Start typing after a delay
-    setTimeout(type, 1500);
-}
-
-// ============================================
 // Stat Animations
 // ============================================
 function initStatAnimations() {
@@ -222,9 +118,6 @@ function initStatAnimations() {
                     const progress = progressBar.style.getPropertyValue('--progress');
                     animateProgress(progressBar, progress);
                 }
-                
-                // Add glow effect
-                entry.target.style.boxShadow = '0 0 30px rgba(0, 255, 136, 0.1)';
                 
                 statObserver.unobserve(entry.target);
             }
@@ -292,7 +185,7 @@ function initFormValidation() {
         try {
             await simulateFormSubmission({ name, email, subject, message });
             
-            showFormSuccess('Message sent successfully! I\'ll get back to you soon.');
+            showFormSuccess('Message sent successfully!');
             contactForm.reset();
         } catch (error) {
             showFormError('Something went wrong. Please try again later.');
@@ -416,47 +309,6 @@ function initSmoothScroll() {
 }
 
 // ============================================
-// Hover Effects
-// ============================================
-function initHoverEffects() {
-    // Card tilt effect
-    const cards = document.querySelectorAll('.stat-card, .tier-card, .content-card, .image-wrapper');
-    
-    cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateX = (y - centerY) / 10;
-            const rotateY = (centerX - x) / 10;
-            
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        });
-        
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-        });
-    });
-    
-    // Button hover effects
-    const buttons = document.querySelectorAll('.btn');
-    
-    buttons.forEach(btn => {
-        btn.addEventListener('mouseenter', () => {
-            btn.style.transform = 'translateY(-2px)';
-        });
-        
-        btn.addEventListener('mouseleave', () => {
-            btn.style.transform = 'translateY(0)';
-        });
-    });
-}
-
-// ============================================
 // CSS Animations
 // ============================================
 const style = document.createElement('style');
@@ -499,48 +351,6 @@ style.textContent = `
 document.head.appendChild(style);
 
 // ============================================
-// Performance Optimization
-// ============================================
-// Lazy load images
-if ('IntersectionObserver' in window) {
-    const images = document.querySelectorAll('img[data-src]');
-    
-    const imageObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.removeAttribute('data-src');
-                imageObserver.unobserve(img);
-            }
-        });
-    });
-    
-    images.forEach(img => imageObserver.observe(img));
-}
-
-// ============================================
-// Console Easter Egg
-// ============================================
-console.log(`
-%c Lucas Pauwels Golf %c
-%c Modern. Sleek. Professional. %c
-
-%c Stats: 295yds Drive | 78% Accuracy | 71.2 Avg Score %c
-
-%c Interested in sponsorship? Contact: lucas@pauwelsgolf.com %c
-`, 
-'background: #00ff88; color: #0a0a0a; font-size: 20px; font-weight: bold; padding: 10px 20px; border-radius: 5px;',
-'',
-'background: #141414; color: #ffffff; font-size: 14px; padding: 5px 15px; border-radius: 3px;',
-'',
-'background: #141414; color: #00ff88; font-size: 12px; padding: 10px; border-radius: 3px; font-style: italic;',
-'',
-'background: #141414; color: #ffffff; font-size: 10px; padding: 5px; border-radius: 3px;',
-''
-);
-
-// ============================================
 // Keyboard Navigation
 // ============================================
 document.addEventListener('keydown', (e) => {
@@ -553,32 +363,22 @@ document.addEventListener('keydown', (e) => {
 });
 
 // ============================================
-// Touch Support
+// Console Easter Egg
 // ============================================
-let touchStartX = 0;
-let touchEndX = 0;
+console.log(`
+%c L P Golf %c
+%c Clean. Professional. Anonymous. %c
 
-document.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-}, false);
+%c Stats: 295yds | 78% | 71.2 Avg %c
 
-document.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-}, false);
-
-function handleSwipe() {
-    const swipeThreshold = 50;
-    const diff = touchStartX - touchEndX;
-    
-    if (Math.abs(diff) > swipeThreshold) {
-        // Could implement section navigation here
-    }
-}
-
-// ============================================
-// Preloader (Optional)
-// ============================================
-window.addEventListener('load', () => {
-    document.body.classList.add('loaded');
-});
+%c contact@lp-golf.com %c
+`, 
+'background: #00ff88; color: #0a0a0a; font-size: 20px; font-weight: bold; padding: 10px 20px; border-radius: 5px;',
+'',
+'background: #121212; color: #ffffff; font-size: 14px; padding: 5px 15px; border-radius: 3px;',
+'',
+'background: #121212; color: #00ff88; font-size: 12px; padding: 10px; border-radius: 3px; font-style: italic;',
+'',
+'background: #121212; color: #ffffff; font-size: 10px; padding: 5px; border-radius: 3px;',
+''
+);
