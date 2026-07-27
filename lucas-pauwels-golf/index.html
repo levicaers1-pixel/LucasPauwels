@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucas Pauwels | Rising Star in Golf</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- Floating Golf Ball Background Element -->
+    <div class="golf-ball-container" id="golfBallContainer"></div>
+    
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-logo">
+            <span class="logo-text">LP</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#stats">Statistics</a></li>
+            <li><a href="#sponsors">Sponsors</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#stats">Statistics</a></li>
+            <li><a href="#sponsors">Sponsors</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="golf-icon-hero">
+                <i class="fas fa-golf-ball-tee"></i>
+            </div>
+            <h1 class="hero-title">
+                <span class="title-line">Lucas Pauwels</span>
+                <span class="title-subline">Rising Star in Golf</span>
+            </h1>
+            <p class="hero-tagline">Driving Ambition. Perfecting Precision. Chasing Greatness.</p>
+            <div class="hero-buttons">
+                <a href="#about" class="btn btn-primary">
+                    <span>Explore My Journey</span>
+                    <i class="fas fa-arrow-down"></i>
+                </a>
+                <a href="#contact" class="btn btn-secondary">
+                    <span>Become a Sponsor</span>
+                    <i class="fas fa-handshake"></i>
+                </a>
+            </div>
+            <div class="scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <span>Scroll Down</span>
+            </div>
+        </div>
+        <div class="hero-golf-club">
+            <i class="fas fa-golf-club"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="section-header">
+            <span class="section-subtitle">Get to Know Me</span>
+            <h2 class="section-title">About Lucas</h2>
+            <div class="title-decoration">
+                <span class="line"></span>
+                <i class="fas fa-golf-ball-tee"></i>
+                <span class="line"></span>
+            </div>
+        </div>
+        
+        <div class="about-container">
+            <div class="about-image-container">
+                <div class="image-stack">
+                    <div class="image-stack-item" style="--delay: 0s;">
+                        <div class="placeholder-img golf-action-1"></div>
+                    </div>
+                    <div class="image-stack-item" style="--delay: 0.2s;">
+                        <div class="placeholder-img golf-action-2"></div>
+                    </div>
+                    <div class="image-stack-item" style="--delay: 0.4s;">
+                        <div class="placeholder-img golf-action-3"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="highlight-text">From the first swing at age 8, I knew golf was my calling.</p>
+                    <p>Now, as a dedicated professional on the rise, I'm committed to pushing the boundaries of my game and achieving excellence on the green. My journey has been one of relentless pursuit—of perfection, of growth, and of the next great shot.</p>
+                    <p>With multiple amateur championships under my belt and a rapidly growing reputation in the professional circuit, I'm not just playing the game—I'm redefining it. Every tournament is a new opportunity to prove that hard work, strategy, and passion can overcome any challenge.</p>
+                </div>
+                
+                <div class="achievements-grid">
+                    <div class="achievement-card">
+                        <div class="achievement-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="achievement-content">
+                            <h4>Amateur Champion</h4>
+                            <p>2023 Belgian National Amateur Winner</p>
+                        </div>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="achievement-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="achievement-content">
+                            <h4>Rising Star</h4>
+                            <p>Ranked #1 in European Amateur Golf Rankings</p>
+                        </div>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="achievement-icon">
+                            <i class="fas fa-flag"></i>
+                        </div>
+                        <div class="achievement-content">
+                            <h4>International Debut</h4>
+                            <p>Represented Belgium at 2024 World Amateur Team Championship</p>
+                        </div>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="achievement-icon">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <div class="achievement-content">
+                            <h4>Tour Debut</h4>
+                            <p>First professional tournament at age 19</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section id="stats" class="stats-section">
+        <div class="stats-bg-overlay"></div>
+        <div class="section-header light">
+            <span class="section-subtitle">By The Numbers</span>
+            <h2 class="section-title">My Statistics</h2>
+            <div class="title-decoration light">
+                <span class="line"></span>
+                <i class="fas fa-chart-line"></i>
+                <span class="line"></span>
+            </div>
+        </div>
+        
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-ring">
+                    <svg viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="45" class="stat-ring-bg"></circle>
+                        <circle cx="50" cy="50" r="45" class="stat-ring-progress" style="stroke-dasharray: 283; stroke-dashoffset: 28;"></circle>
+                    </svg>
+                    <div class="stat-percent">95%</div>
+                </div>
+                <div class="stat-info">
+                    <h4>Driving Accuracy</h4>
+                    <p>Fairways Hit</p>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-ring">
+                    <svg viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="45" class="stat-ring-bg"></circle>
+                        <circle cx="50" cy="50" r="45" class="stat-ring-progress" style="stroke-dasharray: 283; stroke-dashoffset: 57;"></circle>
+                    </svg>
+                    <div class="stat-percent">85%</div>
+                </div>
+                <div class="stat-info">
+                    <h4>Greens in Regulation</h4>
+                    <p>Approach Precision</p>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-ring">
+                    <svg viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="45" class="stat-ring-bg"></circle>
+                        <circle cx="50" cy="50" r="45" class="stat-ring-progress" style="stroke-dasharray: 283; stroke-dashoffset: 71;"></circle>
+                    </svg>
+                    <div class="stat-percent">80%</div>
+                </div>
+                <div class="stat-info">
+                    <h4>Putting Average</h4>
+                    <p>Strokes per Round</p>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-ring">
+                    <svg viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="45" class="stat-ring-bg"></circle>
+                        <circle cx="50" cy="50" r="45" class="stat-ring-progress" style="stroke-dasharray: 283; stroke-dashoffset: 142;"></circle>
+                    </svg>
+                    <div class="stat-percent">50%</div>
+                </div>
+                <div class="stat-info">
+                    <h4>Scrambling</h4>
+                    <p>Recovery Success</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stats-cta">
+            <p>Consistency is key. Every aspect of my game is finely tuned for peak performance.</p>
+            <a href="#sponsors" class="btn btn-light">
+                <span>Partner with Potential</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Sponsors Section -->
+    <section id="sponsors" class="sponsors-section">
+        <div class="section-header">
+            <span class="section-subtitle">Join My Team</span>
+            <h2 class="section-title">Sponsorship Opportunities</h2>
+            <div class="title-decoration">
+                <span class="line"></span>
+                <i class="fas fa-handshake"></i>
+                <span class="line"></span>
+            </div>
+        </div>
+        
+        <div class="sponsors-container">
+            <div class="sponsor-hero">
+                <div class="sponsor-hero-content">
+                    <h3>Why Sponsor Lucas?</h3>
+                    <p>Invest in a rising star with the dedication, visibility, and charisma to elevate your brand. As I climb the ranks of professional golf, your brand will be front and center—on my apparel, in interviews, and across my growing social media presence.</p>
+                    <div class="sponsor-benefits">
+                        <div class="benefit-item">
+                            <i class="fas fa-eye"></i>
+                            <span>High Visibility</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-users"></i>
+                            <span>Engaged Audience</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-chart-growth"></i>
+                            <span>Growing Influence</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-award"></i>
+                            <span>Champion Mindset</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sponsor-hero-image">
+                    <div class="placeholder-img sponsor-placeholder"></div>
+                </div>
+            </div>
+            
+            <div class="sponsor-tiers">
+                <div class="tier-card featured">
+                    <div class="tier-header">
+                        <h4>Title Sponsor</h4>
+                        <div class="tier-price">€50,000+/year</div>
+                    </div>
+                    <div class="tier-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Logo on apparel and golf bag</li>
+                            <li><i class="fas fa-check"></i> Prominent placement in all interviews</li>
+                            <li><i class="fas fa-check"></i> Social media shoutouts (500K+ reach)</li>
+                            <li><i class="fas fa-check"></i> VIP access to tournaments</li>
+                            <li><i class="fas fa-check"></i> Custom content creation</li>
+                            <li><i class="fas fa-check"></i> Website and press release features</li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="btn btn-tier">Get in Touch</a>
+                </div>
+                
+                <div class="tier-card">
+                    <div class="tier-header">
+                        <h4>Premium Partner</h4>
+                        <div class="tier-price">€20,000/year</div>
+                    </div>
+                    <div class="tier-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Logo on golf bag</li>
+                            <li><i class="fas fa-check"></i> Social media mentions</li>
+                            <li><i class="fas fa-check"></i> Tournament invitations</li>
+                            <li><i class="fas fa-check"></i> Quarterly brand features</li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="btn btn-tier">Get in Touch</a>
+                </div>
+                
+                <div class="tier-card">
+                    <div class="tier-header">
+                        <h4>Associate Sponsor</h4>
+                        <div class="tier-price">€5,000/year</div>
+                    </div>
+                    <div class="tier-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Logo on website</li>
+                            <li><i class="fas fa-check"></i> Social media acknowledgment</li>
+                            <li><i class="fas fa-check"></i> Annual brand mention</li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="btn btn-tier">Get in Touch</a>
+                </div>
+            </div>
+            
+            <div class="current-sponsors">
+                <h4>Proudly Supported By</h4>
+                <div class="sponsor-logos">
+                    <div class="sponsor-logo placeholder">Logo</div>
+                    <div class="sponsor-logo placeholder">Logo</div>
+                    <div class="sponsor-logo placeholder">Logo</div>
+                    <div class="sponsor-logo placeholder">Logo</div>
+                    <div class="sponsor-logo placeholder">Logo</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="contact-bg-overlay"></div>
+        <div class="section-header light">
+            <span class="section-subtitle">Let's Connect</span>
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="title-decoration light">
+                <span class="line"></span>
+                <i class="fas fa-envelope-open-text"></i>
+                <span class="line"></span>
+            </div>
+        </div>
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Ready to be part of my journey?</h3>
+                <p>Whether you're interested in sponsorship opportunities, media inquiries, or just want to say hello, I'd love to hear from you. Let's build something great together.</p>
+                
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h5>Location</h5>
+                            <p>Antwerp, Belgium</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h5>Email</h5>
+                            <p>lucas.pauwels@golfpro.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h5>Phone</h5>
+                            <p>+32 475 123 456</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
+            
+            <div class="contact-form-container">
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <select id="subject" name="subject" required>
+                            <option value="" disabled selected>Select a topic</option>
+                            <option value="sponsorship">Sponsorship Inquiry</option>
+                            <option value="media">Media Request</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-form">
+                        <span>Send Message</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="logo-text">LP</span>
+                <p>Lucas Pauwels Golf</p>
+            </div>
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#stats">Statistics</a>
+                <a href="#sponsors">Sponsors</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Lucas Pauwels. All rights reserved.</p>
+            <p>Designed with <i class="fas fa-heart"></i> for the game of golf</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#home" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+</html>
